@@ -36,6 +36,7 @@ activate :deploy do |deploy|
 end
 
 activate :directory_indexes
+activate :livereload
 
 page "/feed.xml", layout: false
 
