@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     
     <%= stylesheet_link_tag "base" %>
-    <title>Blog Title<%= ' - ' + current_article.title unless current_article.nil? %></title>
+    <title>Swappticon<%= ' - ' + current_article.title unless current_article.nil? %></title>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
     <%= javascript_include_tag "modernizr.custom" %>
   </head>
