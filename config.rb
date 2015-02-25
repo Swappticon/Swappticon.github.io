@@ -1,3 +1,4 @@
+require 'nokogiri'
 ###
 # Blog settings
 ###
@@ -13,13 +14,13 @@ activate :blog do |blog|
   # blog.sources = "{year}-{month}-{day}-{title}.html"
   # blog.taglink = "tags/{tag}.html"
   # blog.layout = "layout"
-  blog.summary_separator = /(READMORE)/
-  blog.summary_length = 250
+  # blog.summary_separator = /(READMORE)/
+  # blog.summary_length = 250
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
   # blog.day_link = "{year}/{month}/{day}.html"
   # blog.default_extension = ".markdown"
-  blog.new_article_template = "layouts/post"
+  # blog.new_article_template = "layouts/post"
 
   blog.tag_template = "tag.html"
   blog.calendar_template = "calendar.html"
@@ -82,11 +83,14 @@ page "/feed.xml", layout: false
 # activate :livereload
 
 # Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+  def strip_summary(html)
+    html_doc = Nokogiri::HTML::DocumentFragment.parse(html)
+    h1 = html_doc.at_css "h1"
+    h1.remove
+    html_doc
+  end
+end
 
 set :css_dir, 'stylesheets'
 
