@@ -13,7 +13,7 @@ activate :blog do |blog|
   # Matcher for blog source files
   blog.sources = "articles/{year}-{month}-{day}-{title}.html"
   # blog.taglink = "tags/{tag}.html"
-  # blog.layout = "layout"
+  blog.layout = "layouts/blog"
   # blog.summary_separator = /(READMORE)/
   # blog.summary_length = 250
   # blog.year_link = "{year}.html"
@@ -39,9 +39,12 @@ end
 
 activate :directory_indexes
 activate :livereload
+
 activate :syntax, :line_numbers => true
 set :markdown_engine, :redcarpet
 set :markdown, :fenced_code_blocks => true, :smartypants => true
+
+
 
 page "/feed.xml", layout: false
 
