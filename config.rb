@@ -1,4 +1,3 @@
-require 'nokogiri'
 ###
 # Blog settings
 ###
@@ -91,10 +90,7 @@ page "/feed.xml", layout: false
 # Methods defined in the helpers block are available in templates
 helpers do
   def strip_summary(html)
-    html_doc = Nokogiri::HTML::DocumentFragment.parse(html)
-    h1 = html_doc.at_css "h1"
-    h1.remove
-    html_doc
+    html.gsub(/<h1>.+<\/h1>/, "")
   end
 end
 
