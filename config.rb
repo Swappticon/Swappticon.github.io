@@ -13,7 +13,7 @@ activate :blog do |blog|
   blog.sources = "articles/{year}-{month}-{day}-{title}.html"
   # blog.taglink = "tags/{tag}.html"
   blog.layout = "layouts/blog"
-  # blog.summary_separator = /(READMORE)/
+  blog.summary_separator = /(READMORE)/
   # blog.summary_length = 250
   # blog.year_link = "{year}.html"
   # blog.month_link = "{year}/{month}.html"
@@ -90,7 +90,7 @@ page "/feed.xml", layout: false
 # Methods defined in the helpers block are available in templates
 helpers do
   def strip_summary(html)
-    html.gsub(/<h1>.+<\/h1>/, "")
+    html.gsub(/<h1.?>.+<\/h1>/, "")
   end
 end
 

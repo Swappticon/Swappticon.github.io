@@ -12,6 +12,24 @@ body {
 .tagline {
 }
 
+
+
+// Blog Content
+
+.blog-content {
+  img {
+    width: 100%;
+  }
+}
+
+// Sidebar
+
+.sidebar {
+  font-size: 14px;
+}
+
+// Menu
+
 .menu {
   li {
     a {
@@ -21,10 +39,6 @@ body {
       }
     }
   }
-}
-
-.sidebar {
-  font-size: 14px;
 }
 
 .overlay {
@@ -145,12 +159,6 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
-//  height: 32px;
-//  width: 32px;
-//  transition: background .5s ease-in-out;
-//  &:hover {
-//    background: rgb(15,160,206);
-//  }
 }
 .bg-1 {
   background: #ECEFF1;
@@ -311,13 +319,16 @@ body {
 .vg { color: #008080 } /* Name.Variable.Global */
 .vi { color: #008080 } /* Name.Variable.Instance */
 .il { color: #009999 } /* Literal.Number.Integer.Long */
+
 .highlight {
   margin-bottom: 25px;
 }
+
 .highlight .code {
   width: calc(100% - 50px);
   overflow-y: scroll;
 }
+
 .highlight pre {
   color: #999;
   font-size: 16px;
