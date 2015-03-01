@@ -2,7 +2,6 @@
 title: Build a Blog with Middleman and Host on Github Pages
 date: 2015-02-26 23:51 UTC
 tags: ruby
-published: false
 ---
 
 # Build a Blog with Middleman and Host on Github Pages
@@ -506,6 +505,15 @@ Now add the following code to the head section of your ```layout.erb``` file:
 ```
 
 This is how you link to a stylesheet in erb. Now your code should look just like mine!
+
+Let's push our code to Github and deploy our new changes:
+
+```
+$ git add -A
+$ git commit -m "Added livereload, helpers, and syntax highlighting"
+$ git push --set-upstream origin source
+$ middleman deploy
+```
 
 ## Conclusion
 
