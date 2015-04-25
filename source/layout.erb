@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag "base" %>
-    <title>SWAPP.SEXY<%= ' - ' + current_article.title unless current_article.nil? %></title>
+    <title>Ryan Swapp<%= ' - ' + current_article.title unless current_article.nil? %></title>
     <%= feed_tag :atom, "#{blog.options.prefix.to_s}/feed.xml", title: "Atom Feed" %>
 
     <script>
@@ -23,7 +23,7 @@
   </head>
   <body>
     <%= partial "layouts/menu" %>
-    
+
     <div id="main" role="main">
       <div class="container">
         <div class="row">
@@ -50,7 +50,7 @@
                   <li><%= link_to "#{year} (#{articles.size})", blog_year_path(year) %></li>
                 <% end %>
               </ol>
-            </aside> 
+            </aside>
           </div>
         </div>
       </div>
