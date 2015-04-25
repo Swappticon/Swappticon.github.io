@@ -5,10 +5,30 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2015-02-26T16:51:00-07:00</updated>
+  <updated>2015-04-25T16:13:00-06:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Simple package for adding a url shortener to a Meteor app</title>
+    <link rel="alternate" href="http://blog.url.com/2015/04/25/simple-package-for-adding-a-url-shortener-to-a-meteor-app/"/>
+    <id>http://blog.url.com/2015/04/25/simple-package-for-adding-a-url-shortener-to-a-meteor-app/</id>
+    <published>2015-04-25T16:13:00-06:00</published>
+    <updated>2015-04-25T16:23:17-06:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;Url Shortener for Meteor&lt;/h1&gt;
+
+&lt;p&gt;Recently I was tasked with adding a url shortener to a Meteor app and I decided to package up my solution so that others could use it as well. You can find the package on Atmosphere &lt;a href="https://atmospherejs.com/ryanswapp/url-shortener"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I also created a video tutorial on how to use it&amp;hellip;&lt;/p&gt;
+
+&lt;div class="videoWrapper"&gt;
+  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/fcKAf-di-bA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+</content>
+  </entry>
   <entry>
     <title>Build a Blog with Middleman and Host on Github Pages</title>
     <link rel="alternate" href="http://blog.url.com/2015/02/26/build-a-blog-with-middleman-and-host-on-github-pages/"/>
