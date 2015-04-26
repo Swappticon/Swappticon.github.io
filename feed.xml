@@ -5,10 +5,322 @@
   <id>http://blog.url.com/</id>
   <link href="http://blog.url.com/"/>
   <link href="http://blog.url.com/feed.xml" rel="self"/>
-  <updated>2015-04-25T16:13:00-06:00</updated>
+  <updated>2015-04-26T10:23:00-06:00</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>How to Make a Rails Application Template</title>
+    <link rel="alternate" href="http://blog.url.com/2015/04/26/how-to-make-a-rails-application-template/"/>
+    <id>http://blog.url.com/2015/04/26/how-to-make-a-rails-application-template/</id>
+    <published>2015-04-26T10:23:00-06:00</published>
+    <updated>2015-04-26T10:49:45-06:00</updated>
+    <author>
+      <name>Article Author</name>
+    </author>
+    <content type="html">&lt;h1&gt;How to Make a Rails Application Template&lt;/h1&gt;
+
+&lt;p&gt;Rails application templates are a beautiful thing. They serve one purpose: making your life easier. Anyone who has been building Rails applications for a short amount of time surely has wished that they could speed up the process of starting a new project. Now you can! With Rails application templates you can run one command and start with a project that is filled with all the gems, files, and code that you could ever want. Let me give you an example. Lets say we have a template called bootstrap.rb that starts a new project and adds bootstrap styling, a bootstrap menu, and other features. Here is how we would use this template if it was hosted on my website:&lt;/p&gt;
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;rails new blog -m http://ryanswapp.com/bootstrap.rb
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see, in addition to the default &lt;code&gt;rails new app_name&lt;/code&gt; command I added the -m flag followed by the location of the template. Once you hit enter, any setup tasks that your file has declared will be run and you will be sitting pretty. I love using rails application templates for test apps because I can load it full of awesome stuff (bootstrap) in one command and not have to waste time I don&amp;rsquo;t have making a test app less ugly.&lt;/p&gt;
+
+&lt;p&gt;Now that we know how to use a template, let’s build one!&lt;/p&gt;
+
+&lt;h2&gt;Building a Rails Application Template&lt;/h2&gt;
+
+&lt;p&gt;Rails templates use the Thor library (a toolkit for building command-line interfaces) to add/remove files and make changes to existing files. I will show you some of the basic features of Thor as we build this template.&lt;/p&gt;
+
+&lt;p&gt;As I stated before, we are going to create a template that will create a bootstrap starter app. In any directory on your computer, create a file called &lt;code&gt;bootstrap.rb&lt;/code&gt;. I placed my file here:&lt;/p&gt;
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;code/rails/application-templates/bootstrap.rb
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The first thing we are going to do is add a few gems. This is quite easy to do:&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Add bootstrap and autoprefixer gems&lt;/span&gt;
+
+&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"bootstrap-sass"&lt;/span&gt;
+&lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"autoprefixer-rails"&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add rails factor gem for heroku&lt;/span&gt;
+
+&lt;span class="n"&gt;gem_group&lt;/span&gt; &lt;span class="ss"&gt;:production&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt;
+  &lt;span class="n"&gt;gem&lt;/span&gt; &lt;span class="s2"&gt;"rails_12factor"&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see, adding gems to an application template is almost the same as adding them to a Gemfile.&lt;/p&gt;
+
+&lt;p&gt;Next, we want our application template to install these gems. Add this after the previous code:&lt;/p&gt;
+&lt;div class="highlight plaintext"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;run "bundle install --without production"
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can run bash commands with the run command! I added “–without production” to the command because we don’t want the rails_12factor gem to be used in development.&lt;/p&gt;
+
+&lt;p&gt;Note: you don’t ever have to add “–without production” to bundle again after the first time you run the command. Rails will automatically do this for you.&lt;/p&gt;
+
+&lt;p&gt;Our next step is to remove the README.rdoc file and replace it with a markdown version:&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Fix the README&lt;/span&gt;
+
+&lt;span class="n"&gt;remove_file&lt;/span&gt; &lt;span class="s2"&gt;"README.rdoc"&lt;/span&gt;
+
+&lt;span class="n"&gt;create_file&lt;/span&gt; &lt;span class="s1"&gt;'README.md'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+# Ya Bits
+
+This is a simple rails app with bootstrap!
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Thor gives us the &lt;code&gt;remove_file&lt;/code&gt; and &lt;code&gt;create_file&lt;/code&gt; methods. When you create a new file with Thor, you can pass any text you want to a block as shown above.&lt;/p&gt;
+
+&lt;p&gt;We will now set our app up to use bootstrap. First, we need to remove the &lt;code&gt;application.css&lt;/code&gt; file and create a new &lt;code&gt;application.css.scss&lt;/code&gt; file. Like we saw before, I am using the &lt;code&gt;create_file&lt;/code&gt; method to insert some text into the file. I’ve imported the bootstrap-sass files at the top and then threw in some CSS classes. Lastly, I add bootstrap to the &lt;code&gt;application.js&lt;/code&gt; file with the &lt;code&gt;insert_into_file&lt;/code&gt; method. This method has three parameters: (1) the file we want to insert something into; (2) the text we want to insert; and (3) where we want the text to be inserted. Notice that I am using a regular expression to find the &lt;code&gt;require_tree .&lt;/code&gt; directive in the &lt;code&gt;application.js&lt;/code&gt; file. Thor provides the &lt;code&gt;:before&lt;/code&gt; and &lt;code&gt;:after&lt;/code&gt; helpers to allow you to choose whether the text is inserted before or after the text in the regular expression.&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Begin adding bootstrap to application&lt;/span&gt;
+
+&lt;span class="n"&gt;remove_file&lt;/span&gt; &lt;span class="s1"&gt;'app/assets/stylesheets/application.css'&lt;/span&gt;
+
+&lt;span class="n"&gt;create_file&lt;/span&gt; &lt;span class="s1"&gt;'app/assets/stylesheets/application.css.scss'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+  @import "bootstrap";
+  @import "bootstrap-sprockets";
+
+
+  body {
+    padding-top: 50px;
+  }
+
+  // Helper classes
+
+  .center {
+    text-align: center;
+  }
+
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;insert_into_file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'app/assets/javascripts/application.js'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"//= require bootstrap-sprockets&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:before&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="sr"&gt;/\/\/= require_tree ./&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Now we will use the rails generator to create a Pages controller with a home action. We remove the &lt;code&gt;home.html.erb&lt;/code&gt; file and then create a brand new one so we can start fresh. I’ve added a simple bootstrap jumbotron to the home file. Lastly, we make the home page the root path.&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Create a home page&lt;/span&gt;
+
+&lt;span class="n"&gt;generate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;:controller&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"pages home"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;remove_file&lt;/span&gt; &lt;span class="s1"&gt;'app/views/pages/home.html.erb'&lt;/span&gt;
+
+&lt;span class="n"&gt;create_file&lt;/span&gt; &lt;span class="s1"&gt;'app/views/pages/home.html.erb'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+&amp;lt;div class="jumbotron center"&amp;gt;
+  &amp;lt;h1&amp;gt;Ya Bits!&amp;lt;/h1&amp;gt;
+  &amp;lt;p&amp;gt;Thanks for using the bootstrap application template.&amp;lt;/p&amp;gt;
+
+&amp;lt;/div&amp;gt;
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Make the home page the uh... home page?&lt;/span&gt;
+
+&lt;span class="n"&gt;route&lt;/span&gt; &lt;span class="s2"&gt;"root 'pages#home'"&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I like to start off with a basic bootstrap menu when I’m building starter applications so lets add that as well. We will create a header partial and then insert it into &lt;code&gt;application.html.erb&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Add bootstrap navigation&lt;/span&gt;
+
+&lt;span class="n"&gt;create_file&lt;/span&gt; &lt;span class="s1"&gt;'app/views/layouts/_header.html.erb'&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+&amp;lt;nav class="navbar navbar-default navbar-fixed-top" role="navigation"&amp;gt;
+  &amp;lt;div class="container-fluid"&amp;gt;
+    &amp;lt;!-- Brand and toggle get grouped for better mobile display --&amp;gt;
+    &amp;lt;div class="navbar-header"&amp;gt;
+      &amp;lt;button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"&amp;gt;
+        &amp;lt;span class="sr-only"&amp;gt;Toggle navigation&amp;lt;/span&amp;gt;
+        &amp;lt;span class="icon-bar"&amp;gt;&amp;lt;/span&amp;gt;
+        &amp;lt;span class="icon-bar"&amp;gt;&amp;lt;/span&amp;gt;
+        &amp;lt;span class="icon-bar"&amp;gt;&amp;lt;/span&amp;gt;
+      &amp;lt;/button&amp;gt;
+      &amp;lt;%= link_to 'Ya Bits', root_path, class: 'navbar-brand' %&amp;gt;
+    &amp;lt;/div&amp;gt;
+
+    &amp;lt;!-- Collect the nav links, forms, and other content for toggling --&amp;gt;
+    &amp;lt;div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"&amp;gt;
+      &amp;lt;ul class="nav navbar-nav navbar-right"&amp;gt;
+        &amp;lt;li class="&amp;lt;%= 'active' if current_page?(root_path) %&amp;gt;"&amp;gt;&amp;lt;%= link_to 'Home', root_path %&amp;gt;&amp;lt;/li&amp;gt;
+      &amp;lt;/ul&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/div&amp;gt;
+&amp;lt;/nav&amp;gt;
+
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="n"&gt;insert_into_file&lt;/span&gt; &lt;span class="s1"&gt;'app/views/layouts/application.html.erb'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;"&amp;lt;%= render 'layouts/header' %&amp;gt;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s2"&gt;"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:after&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="sr"&gt;/&amp;lt;body&amp;gt;/&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Ok! We are nearing the end. Let’s also insert the HTML5 Shim and meta tags that bootstrap likes.&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# Add meta tags and html5 shim&lt;/span&gt;
+
+&lt;span class="n"&gt;insert_into_file&lt;/span&gt; &lt;span class="s1"&gt;'app/views/layouts/application.html.erb'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:after&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="sr"&gt;/&amp;lt;%= csrf_meta_tags %&amp;gt;/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+  &amp;lt;meta charset='utf-8'&amp;gt;
+  &amp;lt;meta http-equiv='X-UA-Compatible' content='IE=edge'&amp;gt;
+  &amp;lt;meta name='viewport' content='width=device-width, initial-scale=1'&amp;gt;
+  &amp;lt;!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --&amp;gt;
+  &amp;lt;!-- WARNING: Respond.js doesn't work if you view the page via file:// --&amp;gt;
+  &amp;lt;!--[if lt IE 9]&amp;gt;
+  &amp;lt;script src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js'&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;script src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js'&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;![endif]--&amp;gt;
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see, the &lt;code&gt;insert_into_file&lt;/code&gt; method also takes a block into which we can add any text that we’d like. The last thing that we need to do is add this new application to git. I use Rubymine and need to add &lt;code&gt;.idea/&lt;/code&gt; to the &lt;code&gt;.gitignore&lt;/code&gt; file so that Rubymine’s files don’t mess with git. In addition, I tell rake to create a new database for me because I generally use postgresql.&lt;/p&gt;
+&lt;div class="highlight ruby"&gt;&lt;table style="border-spacing: 0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl" style="text-align: right"&gt;&lt;pre class="lineno"&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="c1"&gt;# I use postgresql most of the time so this will create the database for me&lt;/span&gt;
+
+&lt;span class="n"&gt;rake&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;"db:create"&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Add rubymine files to gitignore&lt;/span&gt;
+
+&lt;span class="n"&gt;insert_into_file&lt;/span&gt; &lt;span class="s1"&gt;'.gitignore'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ss"&gt;:after&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="sr"&gt;/\/tmp/&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;-&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;&lt;span class="sh"&gt;
+
+# Ignore Rubymine files
+.idea/
+
+&lt;/span&gt;&lt;span class="no"&gt;TEXT&lt;/span&gt;
+&lt;span class="k"&gt;end&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Commit that ish to git&lt;/span&gt;
+
+&lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="s2"&gt;"git init"&lt;/span&gt;
+&lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="s2"&gt;"git add -A &amp;amp;&amp;amp; git commit -m 'Initial Commit'"&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;p&gt;That’s it folks! Feel free to check out the &lt;a href="http://www.rubydoc.info/github/erikhuda/thor/master/Thor/Actions#insert_into_file-instance_method"&gt;Thor&lt;/a&gt; documentation as there are many more things you can use it for. In addition, the &lt;a href="http://edgeguides.rubyonrails.org/rails_application_templates.html"&gt;edge guides&lt;/a&gt; can be helpful as well.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions please feel free to leave me a comment! The github repository for this file is here.&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>Simple package for adding a url shortener to a Meteor app</title>
     <link rel="alternate" href="http://blog.url.com/2015/04/25/simple-package-for-adding-a-url-shortener-to-a-meteor-app/"/>
