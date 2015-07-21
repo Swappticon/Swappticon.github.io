@@ -346,7 +346,7 @@ This is a simple rails app with bootstrap!
     <link rel="alternate" href="http://blog.url.com/2015/02/26/build-a-blog-with-middleman-and-host-on-github-pages/"/>
     <id>http://blog.url.com/2015/02/26/build-a-blog-with-middleman-and-host-on-github-pages/</id>
     <published>2015-02-26T16:51:00-07:00</published>
-    <updated>2015-04-25T17:20:07-06:00</updated>
+    <updated>2015-07-21T13:14:23-06:00</updated>
     <author>
       <name>Article Author</name>
     </author>
@@ -943,12 +943,7 @@ end
 104
 105
 106
-107
-108
-109
-110
-111
-112&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;Syntax&lt;/span&gt; &lt;span class="nt"&gt;Highlighting&lt;/span&gt;
+107&lt;/pre&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;pre&gt;&lt;span class="o"&gt;//&lt;/span&gt; &lt;span class="nt"&gt;Syntax&lt;/span&gt; &lt;span class="nt"&gt;Highlighting&lt;/span&gt;
 &lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nc"&gt;.highlight&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;rgba&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;240&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;240&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;240&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="m"&gt;.5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="nc"&gt;.c&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;#999988&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;font-style&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;italic&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="c"&gt;/* Comment */&lt;/span&gt;
 &lt;span class="nc"&gt;.err&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt; &lt;span class="nl"&gt;color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;#a61717&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="nl"&gt;background-color&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;#e3d2d2&lt;/span&gt; &lt;span class="p"&gt;}&lt;/span&gt; &lt;span class="c"&gt;/* Error */&lt;/span&gt;
@@ -1013,11 +1008,6 @@ end
 
 &lt;span class="nc"&gt;.highlight&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
   &lt;span class="nl"&gt;margin-bottom&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="m"&gt;25px&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-
-&lt;span class="nc"&gt;.highlight&lt;/span&gt; &lt;span class="nc"&gt;.code&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-  &lt;span class="nl"&gt;width&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;calc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="m"&gt;100%&lt;/span&gt; &lt;span class="n"&gt;-&lt;/span&gt; &lt;span class="m"&gt;50px&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
-  &lt;span class="nl"&gt;overflow-y&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;scroll&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 
 &lt;span class="nc"&gt;.highlight&lt;/span&gt; &lt;span class="nt"&gt;pre&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
@@ -1085,7 +1075,7 @@ $ middleman deploy
 
 &lt;p&gt;You should now have a Middleman blog up and running and all that is left to do is add some styling. I recommend trying out the excellent &lt;a href="http://getskeleton.com/"&gt;Skeleton CSS&lt;/a&gt; boilerplate. It is lightweight and adds some simple styles as well as a grid. I have moved away from using Bootstrap and Foundation because of the bloat that comes with them. Skeleton is now my go-to boilerplate code.&lt;/p&gt;
 
-&lt;p&gt;If you have any questions please feel free to leave them in the comments. In addition, if you&amp;rsquo;d like me to add anything else to the tutorial please leave a comment or send an email to ryan@swapp.sexy. Thanks!&lt;/p&gt;
+&lt;p&gt;If you have any questions please feel free to leave them in the comments. In addition, if you&amp;rsquo;d like me to add anything else to the tutorial please leave a comment or send an email to &lt;a href="mailto:ryan@swapp.sexy"&gt;ryan@swapp.sexy&lt;/a&gt;. Thanks!&lt;/p&gt;
 </content>
   </entry>
   <entry>
@@ -1099,7 +1089,7 @@ $ middleman deploy
     </author>
     <content type="html">&lt;h1&gt;Welcome to SWAPP.SEXY&lt;/h1&gt;
 
-&lt;p&gt;This is my first post on this new site! Woot. I plan to upload various tutorials on things that I am learning and hopefully they are of some use to you. Please let me know if you have any requests by sending an email to ryan@swapp.sexy. Thanks!&lt;/p&gt;
+&lt;p&gt;This is my first post on this new site! Woot. I plan to upload various tutorials on things that I am learning and hopefully they are of some use to you. Please let me know if you have any requests by sending an email to &lt;a href="mailto:ryan@swapp.sexy"&gt;ryan@swapp.sexy&lt;/a&gt;. Thanks!&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;
 </content>
