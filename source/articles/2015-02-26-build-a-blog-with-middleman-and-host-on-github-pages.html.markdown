@@ -451,11 +451,6 @@ The code is pretty ugly... Let's add some styling so it doesn't look so bad. Cre
   margin-bottom: 25px;
 }
 
-.highlight .code {
-  width: calc(100% - 50px);
-  overflow-y: scroll;
-}
-
 .highlight pre {
   color: #999;
   font-size: 16px;

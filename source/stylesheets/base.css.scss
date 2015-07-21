@@ -278,8 +278,8 @@ ul li {
   }
 }
 
-// Syntax Highlighting
-//.highlight { background-color: rgba(240,240,240,.5) }
+ Syntax Highlighting
+.highlight { background-color: rgba(240,240,240,.5) }
 .c { color: #999988; font-style: italic } /* Comment */
 .err { color: #a61717; background-color: #e3d2d2 } /* Error */
 .k { color: #000000; font-weight: bold } /* Keyword */
@@ -345,10 +345,10 @@ ul li {
   margin-bottom: 25px;
 }
 
-.highlight .code {
-  width: calc(100% - 50px);
-  overflow-y: scroll;
-}
+//.highlight .code {
+//  width: calc(100% - 50px);
+//  overflow-y: scroll;
+//}
 
 .highlight pre {
   color: #999;
@@ -361,7 +361,7 @@ ul li {
   word-break: inherit;
   word-wrap: inherit;
 }
-
+//
 .highlight table {
   width: 100%;
   table-layout: fixed;
